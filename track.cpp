@@ -10,7 +10,7 @@ void libpcb::track::get_points(set<pair<point, int> > &s) {
 
 void libpcb::track::draw(int pri, layer l, gerber &g) {
   if (l == LAYER_CU0 + layer_idx) {
-    if (pri == -50) {
+    if (pri == -50 && clearance > thickness) {
       g.set_clear();
       g.set_aperture(clearance);
       g.move(points[0]);
