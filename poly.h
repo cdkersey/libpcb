@@ -17,24 +17,20 @@ public:
 
   virtual void draw(int pri, layer lay, gerber &g);
 
-private:
+protected:
   double ap;
   layer l;
   std::vector<point> points;
 };
 
-// Filled rectangle, goes under traces and pads
-class plane : public drawable {
+// Like a poly, but filled.
+class plane : public poly {
 public:
-  plane(layer l, point p0, point p1): l(l), p0(p0), p1(p1) {
+  plane(layer l, double ap = 0.010): poly(l, ap) {
     add_priority(-1000);
   }
   
   void draw(int pri, layer lyr, gerber &g);
-
-private:
-  layer l;
-  point p0, p1;
 };
  
 }

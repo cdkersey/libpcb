@@ -198,7 +198,10 @@ void soics(point o) {
     add_point(o-point(0.2, 0.2)).add_point(o + point(-0.2, 3)).
     add_point(o + point(1.75, 3)).add_point(o + point(1.75, -0.2));
 
-  new plane(LAYER_CU1, o - point(0.2, 0.2), o + point(1.75, 3));
+  (new plane(LAYER_CU1))->add_point(o + point(-0.2, -0.2))
+                         .add_point(o + point(1.75, -0.2))
+                         .add_point(o + point(1.75, 3))
+                         .add_point(o + point(-0.2, 3));
 }
 
 int main() {
