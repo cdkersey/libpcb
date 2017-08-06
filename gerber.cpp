@@ -8,24 +8,30 @@ using namespace std;
 using namespace libpcb;
 
 // Set the current aperature (only circular supported)
-void libpcb::gerber::set_aperture(double d) {
+void libpcb::gerber::set_aperture(double d, aperture_t e) {
   if (aperture_set && a == d) return;
 
   aperture_set = true;
   a = d;
+  s = e;
   
   string name;
 
-  if (!apertures.count(d)) {
+  if (!apertures.count(make_pair(d, e))) {
     ostringstream oss;
     oss << 'D' << setw(2) << setfill('0') << apertures.size() + 10;
-    apertures[d] = oss.str();
+    apertures[make_pair(d, e)] = oss.str();
 
     // Declare the aperture as a circle with the given diameter.
-    out << "%AD" << apertures[d] << "C," << d << "*%" << endl;
+    out << "%AD" << oss.str();
+    switch(e) {
+    case AP_CIRCLE: out << "C," << d; break;
+    case AP_SQUARE: out << "R," << d << 'X' << d; break;
+    }
+    out << "*%" << endl;
   }
 
-  name = apertures[d];
+  name = apertures[make_pair(d, e)];
 
   // Switch to the aperture.
   out << name << '*' << endl;

@@ -9,6 +9,11 @@
 
 namespace libpcb {
 
+// Available aperture shapes
+enum aperture_t {
+  AP_CIRCLE, AP_SQUARE
+};
+
 // The gerber file writer; the graphical output API.
 class gerber {
 public:
@@ -29,7 +34,7 @@ public:
   void end_region();
   
   // Set the current aperature (only circular supported)
-  void set_aperture(double d);
+  void set_aperture(double d, aperture_t shape = AP_CIRCLE);
 
   // Set current position.
   void move(point to);
@@ -46,9 +51,12 @@ private:
   bool mode_set, mode_clear, point_set, aperture_set, mode_region;
   
   std::ostream &out;
-  std::map<double, std::string> apertures; // Cache so we don't repeat ourselves
+
+  // Cache so we don't repeat ourselves
+  std::map<std::pair<double, aperture_t>, std::string> apertures;
   point p; // Current point.
   double a; // Current aperture.
+  aperture_t s; // Current aperture shape.
 
   void init();
 
