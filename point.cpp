@@ -16,4 +16,5 @@ point libpcb::point::neighborhood() const {
 
 ostream &libpcb::operator<<(ostream &o, const point &p) {
   o << '(' << p.x << ", " << p.y << ')';
+  return o;
 }

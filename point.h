@@ -18,8 +18,8 @@ struct point {
   point operator+(const point &r) const { return point(x + r.x, y + r.y); }
   point operator-(const point &r) const { return point(x - r.x, y - r.y); }
   
-  point operator+=(const point &r) { x += r.x; y += r.y; }
-  point operator-=(const point &r) { x -= r.x; y -= r.y; }
+  point operator+=(const point &r) { x += r.x; y += r.y; return *this; }
+  point operator-=(const point &r) { x -= r.x; y -= r.y; return *this; }
 
   bool operator<(const point &r) const {
     return (x < r.x) || ((x == r.x) && y < r.y);
