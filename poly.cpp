@@ -16,7 +16,6 @@ void libpcb::poly::draw(int pri, layer lay, gerber &g) {
 void libpcb::plane::draw(int pri, layer lay, gerber &g) {
   if (l == lay && pri == -1000) {
     g.start_region();
-    g.set_aperture(ap);
     g.move(points[0]);
     for (unsigned i = 1; i < points.size(); ++i) g.draw(points[i]);
     g.draw(points[0]);

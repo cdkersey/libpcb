@@ -87,6 +87,8 @@ void libpcb::gerber::init() {
       << "%FSLAX26Y26*%" << endl
     // << "%TF.Part,Other*%" << endl // TODO: layer name
       << "%MOIN*%" << endl;
+  // Default aperture just to suppress a warning from gerbv
+  set_aperture(0.01);
 }
 
 // Output coordinate in COBOLesque gerber format.
